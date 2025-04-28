@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 public class RestaurantDTO {
 
     private int id;
@@ -63,4 +65,15 @@ public class RestaurantDTO {
         this.city = city;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        RestaurantDTO that = (RestaurantDTO) o;
+        return id == that.id && Objects.equals(name, that.name) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(restaurantDescription, that.restaurantDescription);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, address, city, restaurantDescription);
+    }
 }
