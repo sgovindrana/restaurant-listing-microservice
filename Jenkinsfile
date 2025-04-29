@@ -2,10 +2,11 @@ pipeline {
   agent any
 
   environment {
-    DOCKERHUB_CREDENTIALS = credentials('DOCKER_HUB_CREDENTIAL')
-    VERSION = "${env.BUILD_ID}"
-
-  }
+      DOCKERHUB_CREDENTIALS = credentials('DOCKER_HUB_CREDENTIAL')
+      VERSION = "${env.BUILD_ID}"
+      JAVA_HOME = tool name: 'JDK 21', type: 'JDK' // Specify your Java version here
+      PATH = "${JAVA_HOME}/bin:${env.PATH}"
+    }
 
   tools {
     maven "Maven"
