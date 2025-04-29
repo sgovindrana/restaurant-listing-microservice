@@ -60,29 +60,14 @@ pipeline {
         }
 
 
-//       stage('Docker Build and Push') {
-//       steps {
-//           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-//           sh 'docker build -t govindrana/restaurantlisting:${VERSION} .'
-//           sh 'docker push govindrana/restaurantlisting:${VERSION}'
-//       }
-//     }
-        stage('Docker Build and Push') {
-              steps {
-                // inject USER/PASS from Jenkins credentials
-                withCredentials([usernamePassword(
-                  credentialsId: 'DOCKER_HUB_CREDENTIAL',
-                  usernameVariable: 'DOCKER_USER',
-                  passwordVariable: 'DOCKER_PASS'
-                )]) {
-                  sh '''
-                    echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
-                    docker build -t $DOCKER_USER/restaurantlisting:${VERSION} .
-                    docker push $DOCKER_USER/restaurantlisting:${VERSION}
-                  '''
-                }
-              }
-            }
+      stage('Docker Build and Push') {
+      steps {
+          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+          sh 'docker build -t govindrana/restaurantlisting:${VERSION} .'
+          sh 'docker push govindrana/restaurantlisting:${VERSION}'
+      }
+    }
+
 
      stage('Cleanup Workspace') {
       steps {
