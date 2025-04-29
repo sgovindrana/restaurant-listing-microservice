@@ -25,6 +25,7 @@
 		<!-- independent libraries -->
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 		<lombok.version>1.18.32</lombok.version>
+		<sonar.host.url>http://15.237.251.132:9000</sonar.host.url>
 	</properties>
 
 	<!-- ─────────────────────── Dependencies ──────────────────────── -->
@@ -115,6 +116,30 @@
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.8.0.2131</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.12</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<!-- Spring Boot repackage -->
